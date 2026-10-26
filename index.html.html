@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CILS B1 · Карточки</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#fafaf7;--fg:#1c2420;--card:#fff;--mut:#6b7570;--g:#009246;--r:#e63946;--bd:#e2e5e0;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141816;--fg:#eef2ee;--card:#1e2420;--mut:#9aa59f;--g:#2fbf71;--r:#ff6b78;--bd:#2c342f;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#141816;--fg:#eef2ee;--card:#1e2420;--mut:#9aa59f;--g:#2fbf71;--r:#ff6b78;--bd:#2c342f;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.4 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:560px;margin:0 auto;padding:16px}
+h1{font-size:24px;margin:8px 0 2px;color:var(--r)}
+.sub{color:var(--mut);margin:0 0 16px;font-size:14px}
+.grid{display:grid;gap:10px}
+.t,.t2{display:flex;justify-content:space-between;align-items:center;padding:14px;border:1px solid var(--bd);background:var(--card);border-radius:14px;cursor:pointer;width:100%;color:inherit;font:inherit;text-align:left}
+.t b{display:block}.t small{color:var(--mut)}
+.n{font-weight:700;color:var(--g);white-space:nowrap}
+.bar{height:6px;background:var(--bd);border-radius:3px;margin:16px 0}
+.bar i{display:block;height:100%;background:var(--g);border-radius:3px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:20px;min-height:230px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:24px;gap:14px}
+.w{font-size:28px;font-weight:700}
+.tr{font-size:22px;color:var(--r)}
+.row{display:flex;gap:10px;margin-top:14px}
+button.b{flex:1;padding:16px;border-radius:14px;border:0;font:inherit;font-weight:700;color:#fff;cursor:pointer}
+.ok{background:var(--g)}.no{background:var(--r)}.nx{background:var(--fg);color:var(--bg)!important}
+.link{background:none;border:0;color:var(--mut);font:inherit;cursor:pointer;padding:6px 0}
+.top{display:flex;justify-content:space-between;align-items:center}
+.t2{margin-bottom:10px;justify-content:center;font-weight:700;border-color:var(--g)}
+.e{display:flex;justify-content:space-between;gap:10px;padding:10px 12px;border-radius:10px;margin:6px 0;border:1px solid;cursor:pointer}
+.e.k{color:var(--g);border-color:var(--g)}.e.u{color:var(--r);border-color:var(--r)}
+.e span{color:var(--mut);text-align:right;font-size:14px}
+h2{font-size:16px;margin:18px 0 4px}
+.tabs{margin:0 0 8px}.tab{flex:1;padding:10px;border-radius:10px;border:1px solid var(--bd);background:var(--card);color:var(--fg);font:inherit;cursor:pointer}.tab.on{background:var(--fg);color:var(--bg)}
+.card{touch-action:pan-y;user-select:none;-webkit-user-select:none;cursor:grab}
+</style></head><body><main id="app"></main>
+<script>
+const T=[
+["fam","La famiglia","Семья",`la nascita|рождение
+il genitore|родитель
+il figlio / la figlia|сын / дочь
+il supermercato|супермаркет
+fare la spesa|ходить за продуктами
+il cognome|фамилия
+la festa|праздник
+il matrimonio|брак, свадьба
+sposarsi / sposato|жениться, выйти замуж / в браке
+l’atto di nascita|свидетельство о рождении
+l’asilo (nido)|детский сад (ясли)
+l’anagrafe|отдел регистрации населения
+il nonno / la nonna|дедушка / бабушка
+il ruolo|роль
+il membro (della famiglia)|член (семьи)
+la madre / il padre|мать / отец
+crescere|расти
+il/la single|одинокий, не в браке
+il parto|роды
+l’ostetrica|акушерка
+il compleanno|день рождения
+la coppia|пара
+il viaggio di nozze|свадебное путешествие
+la famiglia mononucleare|нуклеарная семья`],
+["cit","La città","Город",`il biglietto|билет
+segnalare|сообщить (о проблеме)
+il passeggero|пассажир
+l’uscita|выход
+la piazza|площадь
+la stazione|вокзал, станция
+la multa|штраф
+la sosta|стоянка, парковка
+la segnalazione|сообщение о проблеме
+il parco / l’area verde|парк / зелёная зона
+la sagra|местный гастрономический праздник
+la metropolitana|метро
+il traffico|движение, пробки
+l’assessore|член городской администрации
+la zona (area) pedonale|пешеходная зона
+convalidare|компостировать, валидировать
+la polizia municipale|муниципальная полиция
+il cartello|табличка, указатель
+il trasporto pubblico|общественный транспорт
+la linea|линия, маршрут
+il distributore automatico|автомат (по продаже билетов)
+il tornello|турникет
+il commerciante|торговец, владелец магазина
+timbrare|пробить (билет)
+il quartiere|район`],
+["lav","Il lavoro","Работа",`la selezione|отбор
+l’esperienza|опыт
+l’offerta di lavoro|вакансия
+il colloquio (di lavoro)|собеседование
+il proprietario|владелец
+il collega|коллега
+l’azienda|компания, предприятие
+la sicurezza|безопасность
+il titolo di studio|образование, диплом
+la carriera|карьера
+l’emergenza|чрезвычайная ситуация
+il lavoratore|работник
+il cuoco|повар
+lavorativo|рабочий, трудовой
+lo stipendio|зарплата
+assumere|нанять / принимать (лекарство)
+il turno|смена
+il curriculum|резюме
+il cameriere|официант
+l’incarico|поручение, должность
+le ferie|отпуск
+il compenso|вознаграждение, оплата
+la riunione|совещание
+il datore di lavoro|работодатель
+a tempo determinato|временный (договор)
+il contratto|договор`],
+["scu","La scuola","Школа",`lo studente|студент, ученик
+il professore|преподаватель
+la laurea|высшее образование, диплом вуза
+scolastico|школьный
+il laboratorio|лаборатория, практикум
+la classe|класс
+il liceo|лицей (старшая школа)
+la verifica|проверка, контрольная
+la laurea magistrale|магистратура
+il/la preside|директор школы
+universitario|университетский
+l’immatricolazione|зачисление в вуз
+il recupero|восстановление, доп. занятия
+il diploma|аттестат, диплом
+la tassa|взнос, налог
+il corso di laurea|программа обучения в вузе
+la piattaforma online|онлайн-платформа
+il numero programmato|ограниченный приём (по конкурсу)
+frequentare|посещать (курс, школу)
+la mensa|столовая
+interrogare|спрашивать (на уроке)
+l’obbligo scolastico|обязательное обучение
+la maturità|выпускной экзамен в школе
+il ricevimento (dei professori)|приёмные часы учителей`],
+["tem","Il tempo libero","Свободное время",`lo spettacolo|спектакль, шоу
+prenotare|бронировать
+il teatro|театр
+il concorso|конкурс
+dedicarsi a / dedicare|посвящать себя, заниматься
+la palestra|спортзал
+l’abbonamento|абонемент, подписка
+l’ingresso|вход
+lo sconto|скидка
+il tempo libero|свободное время
+la mostra|выставка
+il concerto|концерт
+l’agenzia di viaggi|турагентство
+l’iscritto|записавшийся, член клуба
+lo spettatore|зритель
+rilassarsi|расслабляться
+il vincitore|победитель
+la vacanza|отпуск, каникулы
+lo spogliatoio|раздевалка
+la prenotazione|бронь
+il museo|музей
+l’allenamento|тренировка
+il furto|кража
+la ricetta|рецепт
+vietato|запрещено`],
+["amb","L’ambiente","Окружающая среда",`il rifiuto|отходы, мусор
+la bicicletta|велосипед
+l’agriturismo|агротуризм, ферма-гостиница
+la raccolta differenziata|раздельный сбор мусора
+l’ambiente|окружающая среда
+la pista ciclabile|велодорожка
+la carta|бумага
+l’albero|дерево
+il cassonetto|мусорный бак
+il cartone|картон
+biologico|органический, био
+differenziare|сортировать (мусор)
+il contenitore|контейнер
+il sacco|мешок
+l’organico|органические отходы
+l’indifferenziato|несортированный мусор
+la plastica|пластик
+lo scarto|отходы, остатки
+il condominio|многоквартирный дом
+ecologico|экологичный
+il vetro|стекло
+l’inquinamento|загрязнение
+l’energia (rinnovabile)|(возобновляемая) энергия
+il pannello solare|солнечная панель
+l’allevamento|животноводство, ферма
+l’agricoltura|сельское хозяйство`],
+["san","La sanità","Здоровье и медицина",`il vaccino|вакцина
+il farmaco|лекарство
+il paziente|пациент
+l’ospedale|больница
+la febbre|температура, жар
+sanitario|медицинский
+l’ospite|гость, пациент (в учреждении)
+la tosse|кашель
+l’antibiotico|антибиотик
+il trattamento|лечение, процедура
+l’influenza|грипп
+le analisi|анализы
+il benessere|благополучие, wellness
+il raffreddore|простуда, насморк
+avere mal di testa / di gola|болит голова / горло
+la farmacia / il farmacista|аптека / фармацевт
+la malattia|болезнь
+l’infermiere|медбрат, медсестра
+la dimissione|выписка
+il medico curante|лечащий (семейный) врач
+il reparto|отделение (больницы)
+il sintomo|симптом
+l’effetto collaterale|побочный эффект
+l’allergia|аллергия
+la tessera sanitaria|медицинский полис`],
+["lin","La lingua italiana","Итальянский язык",`il corso|курс
+l’iscrizione|запись, регистрация
+la lingua (straniera)|(иностранный) язык
+studiare / lo studio|учиться, изучать / учёба
+l’istituto|институт, школа
+cancellare|отменить
+il livello|уровень
+la certificazione|сертификат
+la segreteria|секретариат, канцелярия
+il seminario|семинар
+imparare|учить, выучить
+la quota|взнос
+il rimborso|возврат денег
+interrompere|прервать
+versare|внести (деньги)
+la classifica|рейтинг
+sbagliato|неправильный
+trattenere|удержать (сумму)
+il bonifico bancario|банковский перевод
+l’insegnante|учитель`],
+["com","La comunicazione oggi","Коммуникация сегодня",`pubblicare|публиковать
+il social network|соцсеть
+l’utilizzo|использование
+comunicare|общаться, сообщать
+la promozione|акция, спецпредложение
+l’evento|событие, мероприятие
+l’app|приложение
+il premio|приз
+la notizia|новость
+il giornale|газета
+lo smartphone|смартфон
+scaricare|скачать
+l’utente|пользователь
+la canzone|песня
+il messaggio|сообщение
+l’assistenza|поддержка, помощь
+la radio|радио
+la pubblicità|реклама
+gestire|управлять
+il rischio / rischiare|риск / рисковать
+la redazione|редакция
+la connessione|подключение, связь
+la messaggistica|мессенджеры`],
+["ita","L’Italia nel mondo","Италия в мире",`la cittadinanza|гражданство
+lo straniero|иностранец
+la cultura / culturale|культура / культурный
+l’estero|заграница
+il successo|успех
+turistico|туристический
+la prefettura|префектура
+il portale|портал (сайт)
+il presidente|президент
+la proiezione|показ (фильма)
+appassionato|увлечённый, любитель
+festeggiare|праздновать
+convocare|вызвать (в учреждение)
+il ministero|министерство
+la Repubblica|республика
+la rassegna|фестиваль, цикл показов
+la tradizione|традиция
+la sezione|раздел
+il consolato|консульство`],
+["bur","Burocrazia","Бюрократическая лексика",`il comune|мэрия, муниципалитет
+la domanda|заявление
+la legge|закон
+prevedere / previsto|предусматривать / предусмотренный
+entro|до (о сроке), в течение
+il servizio|услуга, служба
+disponibile|доступный, свободный
+l’ufficio|офис, отдел
+la residenza|место жительства
+il modulo|бланк, анкета
+iscriversi|записаться
+inviare|отправить
+il documento d’identità|удостоверение личности
+l’ammissione|приём, допуск
+la denuncia / denunciare|заявление / заявить официально
+la richiesta|запрос, заявление
+il certificato|справка
+controllare|проверять
+ottenere|получить
+residente|проживающий
+consegnare|сдать, вручить
+il requisito|требование, условие
+richiedere|запросить, подать заявление
+la dichiarazione|заявление, декларация
+presso|при, в (учреждении)
+allegare|приложить
+il costo|стоимость
+valido / in corso di validità|действительный (документ)
+il regolamento|правила, положение
+l’attestato / l’attestazione|справка, подтверждение
+il dato personale|персональные данные
+annuale|годовой, ежегодный
+ritirare|забрать, получить
+superare|сдать (экзамен), превысить
+svolgere|проводить, выполнять
+il pagamento|оплата
+effettuare|осуществлять, проводить
+funzionare|работать (о технике)
+comunale|муниципальный
+l’appuntamento|запись на приём
+la scadenza|срок (окончания)
+obbligatorio|обязательный
+rinnovare|продлить, обновить
+settimanale|еженедельный
+la bolletta|счёт (за коммунальные услуги)
+consultare|посмотреть, ознакомиться
+rilasciare|выдать (документ)
+rimborsare|возместить
+risolvere|решить
+risultare|оказаться, значиться
+scadere|истекать (о сроке)
+la pratica|дело, оформление
+la procedura|процедура
+la documentazione|документы, пакет документов
+il permesso di soggiorno|вид на жительство
+il ritardo|задержка, опоздание
+la firma / firmare|подпись / подписать
+mensile|ежемесячный
+lo sportello|окошко (в учреждении)
+il codice fiscale|налоговый код
+lamentarsi|жаловаться
+la sanzione|санкция, штраф
+annullare|аннулировать, отменить
+danneggiato|повреждённый
+il divieto|запрет
+essere allergico / intollerante a|иметь аллергию / непереносимость
+giornaliero|ежедневный
+l’imprevisto|непредвиденная ситуация
+sostituire|заменить
+tardivo|поздний, просроченный
+la delega|доверенность
+l’autocertificazione|самодекларация
+maggiorenne|совершеннолетний`]
+].map(([id,it,ru,d])=>({id,it,ru,w:d.split("\n").map(l=>{const p=l.split("|");return{i:p[0],r:p[1]}})}));
+
+let known={};try{known=JSON.parse(localStorage.getItem("cils-known")||"{}")}catch(e){}
+const save=()=>{try{localStorage.setItem("cils-known",JSON.stringify(known))}catch(e){}};
+const app=document.getElementById("app");
+const left=t=>t.w.filter(x=>!known[x.i]);
+let topic=null,q=[],pos=0,shown=false;
+
+function home(){
+  topic=null;
+  const all=T.reduce((a,t)=>a+t.w.length,0),rest=T.reduce((a,t)=>a+left(t).length,0);
+  app.innerHTML=`<h1>CILS B1 Cittadinanza</h1><p class="sub">Выучено ${all-rest} из ${all}. Выбери тему:</p>
+  <div class="bar"><i style="width:${(all-rest)/all*100}%"></i></div><button class="t2" id="dc">Словарь: все слова</button><div class="grid">`+
+  T.map(t=>`<button class="t" data-id="${t.id}"><span><b>${t.it}</b><small>${t.ru}</small></span><span class="n">${left(t).length}/${t.w.length}</span></button>`).join("")+
+  `</div><p><button class="link" id="rs">Сбросить весь прогресс</button></p>`;
+  app.querySelectorAll(".t").forEach(b=>b.onclick=()=>start(b.dataset.id));
+  document.getElementById("dc").onclick=()=>{flt="all";dict()};
+  const rs=document.getElementById("rs");let armed=false;rs.onclick=()=>{if(!armed){armed=true;rs.textContent="Точно сбросить? Нажми ещё раз";rs.style.color="var(--r)";setTimeout(()=>{armed=false;rs.textContent="Сбросить весь прогресс";rs.style.color=""},4000)}else{known={};save();home()}};
+}
+function start(id){
+  topic=T.find(t=>t.id===id);
+  q=left(topic).sort(()=>Math.random()-.5);pos=0;shown=false;card();
+}
+function card(){
+  const hd=`<div class="top"><button class="link" id="bk">← Темы</button><span class="sub">${topic.it}</span></div>`;
+  if(pos>=q.length){
+    const n=left(topic).length;
+    app.innerHTML=hd+`<div class="card"><div class="w">${n?"Круг окончен":"Тема выучена! 🎉"}</div>${n?`<div class="sub">Осталось неизвестных слов: ${n}</div>`:""}</div>`+
+    (n?`<div class="row"><button class="b ok" id="again">Ещё круг</button></div>`:"");
+    document.getElementById("bk").onclick=home;
+    const a=document.getElementById("again");if(a)a.onclick=()=>start(topic.id);return;
+  }
+  const c=q[pos];
+  app.innerHTML=hd+`<div class="bar"><i style="width:${pos/q.length*100}%"></i></div>
+  <div class="card"><div class="w">${c.i}</div>${shown?`<div class="tr">${c.r}</div>`:""}<div class="sub">${pos+1} / ${q.length}</div><div class="sub">← не знаю · знаю →</div></div>
+  <div class="row">${shown?`<button class="b nx" id="nx">Дальше</button>`:`<button class="b no" id="dk">Не знаю</button><button class="b ok" id="kn">Знаю</button>`}</div>`;
+  document.getElementById("bk").onclick=home;
+  const f=(id,fn)=>{const e=document.getElementById(id);if(e)e.onclick=fn};
+  const know=()=>{known[c.i]=1;save();pos++;shown=false;card()};
+  const dont=()=>{shown=true;card()};
+  const next=()=>{pos++;shown=false;card()};
+  f("kn",know);f("dk",dont);f("nx",next);
+  const cd=app.querySelector(".card");let sx=null,dx=0;
+  cd.onpointerdown=e=>{sx=e.clientX;dx=0;cd.style.transition="none";try{cd.setPointerCapture(e.pointerId)}catch(_){}};
+  cd.onpointermove=e=>{if(sx===null)return;dx=e.clientX-sx;cd.style.transform=`translateX(${dx}px) rotate(${dx/25}deg)`;cd.style.borderColor=dx>20?"var(--g)":dx<-20?"var(--r)":""};
+  const end=()=>{if(sx===null)return;const d=dx;sx=null;if(d>90)know();else if(d<-90)(shown?next():dont());else{cd.style.transition="transform .2s";cd.style.transform="";cd.style.borderColor=""}};
+  cd.onpointerup=end;cd.onpointercancel=end;
+}
+let flt="all";
+function dict(){
+  let h=`<div class="top"><button class="link" id="bk">← Темы</button><span class="sub">Словарь</span></div><div class="row tabs">`+
+  [["all","Все"],["no","Не знаю"],["yes","Знаю"]].map(([k,l])=>`<button class="tab${flt===k?" on":""}" data-k="${k}">${l}</button>`).join("")+
+  `</div><p class="sub">Красные: не знаю, зелёные: знаю. Нажми на слово, чтобы сменить отметку.</p>`;
+  T.forEach((t,ti)=>{
+    const ws=t.w.map((x,wi)=>[x,wi]).filter(([x])=>flt==="all"||(flt==="yes")===!!known[x.i]);
+    if(!ws.length)return;
+    h+=`<h2>${t.it} · ${t.w.length-left(t).length}/${t.w.length}</h2>`+ws.map(([x,wi])=>`<div class="e ${known[x.i]?"k":"u"}" data-t="${ti}" data-w="${wi}"><b>${x.i}</b><span>${x.r}</span></div>`).join("");
+  });
+  const y=window.scrollY;app.innerHTML=h;window.scrollTo(0,y);
+  document.getElementById("bk").onclick=home;
+  app.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{flt=b.dataset.k;dict()});
+  app.querySelectorAll(".e").forEach(e=>e.onclick=()=>{const w=T[e.dataset.t].w[e.dataset.w];if(known[w.i])delete known[w.i];else known[w.i]=1;save();dict()});
+}
+home();
+</script></body></html>
