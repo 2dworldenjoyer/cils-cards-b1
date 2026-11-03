@@ -35,6 +35,265 @@ h2{font-size:16px;margin:18px 0 4px}
 .card{touch-action:pan-y;user-select:none;-webkit-user-select:none;cursor:grab}
 </style></head><body><main id="app"></main>
 <script>
+const B={
+fam:`il marito / la moglie|муж / жена
+il fratello / la sorella|брат / сестра
+i parenti|родственники
+il suocero / la suocera|свёкор, тесть / свекровь, тёща
+il/la nipote|внук, внучка / племянник, племянница
+il cugino / la cugina|двоюродный брат / сестра
+il fidanzato / la fidanzata|жених, парень / невеста, девушка
+convivere|жить вместе (без брака)
+separarsi / divorziare|расстаться / развестись
+il divorzio|развод
+incinta|беременная
+il neonato|новорождённый
+allevare / educare|растить / воспитывать
+lo stato di famiglia|справка о составе семьи
+andare d’accordo|ладить
+le faccende di casa|домашние дела
+il congedo di maternità / paternità|декретный отпуск`,
+cit:`il sindaco|мэр
+il municipio|здание мэрии
+l’abitante|житель
+il marciapiede|тротуар
+l’incrocio|перекрёсток
+il semaforo|светофор
+le strisce pedonali|пешеходный переход
+il parcheggio|парковка
+la fermata (dell’autobus)|остановка
+l’abbonamento mensile|проездной на месяц
+la periferia|окраина
+il centro storico|исторический центр
+i lavori stradali|дорожные работы
+la biblioteca|библиотека
+il vigile (urbano)|регулировщик, муниципальный полицейский
+il rumore|шум`,
+lav:`il lavoro a tempo indeterminato|постоянная работа
+il part-time / il tempo pieno|неполный / полный рабочий день
+il dipendente|сотрудник (по найму)
+il/la lavoratore autonomo / la partita IVA|самозанятый, ИП
+licenziare / licenziarsi|уволить / уволиться
+disoccupato|безработный
+la disoccupazione|безработица
+il centro per l’impiego|центр занятости
+l’annuncio di lavoro|объявление о работе
+candidarsi|откликнуться на вакансию
+il tirocinio / lo stage|стажировка
+la busta paga|расчётный листок
+gli straordinari|сверхурочные
+la pensione|пенсия
+il capo / il responsabile|начальник / ответственный
+il sindacato|профсоюз
+la malattia (essere in malattia)|больничный`,
+scu:`la scuola dell’infanzia|детский сад (3–6 лет)
+la scuola primaria (elementare)|начальная школа
+la scuola secondaria di primo grado (media)|средняя школа
+l’istituto tecnico / professionale|техникум / профучилище
+la pagella|табель успеваемости
+il voto|оценка
+essere promosso / bocciato|перейти в следующий класс / остаться на второй год
+i compiti (a casa)|домашнее задание
+la materia|предмет
+il colloquio con gli insegnanti|встреча с учителями
+l’anno scolastico|учебный год
+la gita scolastica|школьная экскурсия
+la borsa di studio|стипендия
+la tesi|дипломная работа
+l’esame di Stato|государственный экзамен
+lo zaino / l’astuccio|рюкзак / пенал
+diplomarsi|получить аттестат (окончить школу)
+laurearsi|окончить вуз`,
+tem:`l’hobby / il passatempo|хобби
+fare sport / praticare uno sport|заниматься спортом
+la squadra|команда
+la partita|матч, игра
+il fine settimana / il weekend|выходные
+la gita / l’escursione|поездка, прогулка / экскурсия
+il viaggio organizzato|организованный тур
+l’albergo / l’hotel|гостиница
+affittare un appartamento|снять квартиру
+la camera singola / doppia|одноместный / двухместный номер
+il campeggio|кемпинг
+la biglietteria|касса
+il regista / l’attore|режиссёр / актёр
+la festa di paese|местный праздник
+uscire con gli amici|гулять с друзьями
+il volontariato|волонтёрство`,
+amb:`riciclare|перерабатывать
+inquinare|загрязнять
+lo smog|смог
+il riscaldamento globale|глобальное потепление
+il clima / il cambiamento climatico|климат / изменение климата
+sprecare / lo spreco|тратить впустую / расточительство
+risparmiare|экономить
+l’isola ecologica|пункт приёма отходов
+gli ingombranti|крупногабаритный мусор
+la bottiglia / la lattina|бутылка / жестяная банка
+l’olio usato|отработанное масло
+le pile / le batterie|батарейки
+la natura|природа
+il bosco|лес
+rispettare l’ambiente|беречь окружающую среду
+i mezzi pubblici|общественный транспорт`,
+san:`il medico di famiglia (di base)|семейный врач, терапевт
+la ricetta (medica)|рецепт (врача)
+la visita (medica)|приём у врача, осмотр
+il pronto soccorso|приёмный покой, скорая помощь в больнице
+il ticket|доплата за медуслуги
+il Servizio Sanitario Nazionale|государственная система здравоохранения
+la ASL|местное управление здравоохранения
+lo specialista|врач-специалист
+la prenotazione (CUP)|запись к врачу
+ricoverare / il ricovero|госпитализировать / госпитализация
+la ferita|рана
+farsi male|пораниться, ушибиться
+guarire|выздороветь
+la pressione|давление
+la dieta|диета
+la guardia medica|дежурный врач (ночью и в выходные)`,
+lin:`la grammatica|грамматика
+il vocabolario / il dizionario|словарь (запас слов) / словарь (книга)
+la pronuncia|произношение
+il dialetto|диалект
+la madrelingua|родной язык
+bilingue|двуязычный
+il verbo / il sostantivo / l’aggettivo|глагол / существительное / прилагательное
+l’errore|ошибка
+tradurre / la traduzione|переводить / перевод
+il corso intensivo|интенсивный курс
+la lezione|урок, занятие
+il test d’ingresso|вступительный тест
+migliorare|улучшать
+esercitarsi|практиковаться
+lo scambio linguistico|языковой обмен`,
+com:`la posta elettronica / l’email|электронная почта
+l’allegato|вложение
+il cellulare / il telefonino|мобильный телефон
+la chiamata / la videochiamata|звонок / видеозвонок
+mandare un messaggio|отправить сообщение
+la rete / il wi-fi|сеть / вайфай
+navigare in internet|сидеть в интернете
+il sito web|сайт
+la password|пароль
+registrarsi / accedere|зарегистрироваться / войти
+condividere|делиться (в соцсетях)
+il telegiornale|теленовости
+la rivista|журнал
+il post / il commento|пост / комментарий
+la privacy|конфиденциальность
+la bolletta del telefono|счёт за телефон`,
+ita:`la bandiera|флаг
+l’inno nazionale|государственный гимн
+la Costituzione|конституция
+il Made in Italy|итальянское производство
+emigrare / l’emigrazione|эмигрировать / эмиграция
+l’immigrato|иммигрант
+integrarsi|интегрироваться
+il patrimonio (artistico / UNESCO)|наследие
+il monumento|памятник
+la cucina italiana|итальянская кухня
+la moda / il design|мода / дизайн
+famoso / conosciuto|известный
+la regione / la provincia|область / провинция
+il giuramento|присяга
+il decreto|указ, постановление
+la festa della Repubblica|День Республики (2 июня)`,
+ia:`l’intelligenza artificiale (IA)|искусственный интеллект (ИИ)
+la tecnologia / tecnologico|технология / технологический
+il chatbot / l’assistente virtuale|чат-бот / виртуальный помощник
+il robot|робот
+il computer / il dispositivo|компьютер / устройство
+il programma / l’applicazione|программа / приложение
+l’algoritmo|алгоритм
+i dati|данные
+automatico / automatizzare|автоматический / автоматизировать
+lo sviluppo / sviluppare|развитие / разрабатывать
+l’innovazione|инновация
+digitale|цифровой
+la ricerca (scientifica)|(научное) исследование
+il vantaggio / lo svantaggio|преимущество / недостаток
+il pericolo / pericoloso|опасность / опасный
+sostituire l’uomo|заменить человека
+perdere il posto di lavoro|потерять работу
+le notizie false (fake news)|фейковые новости
+la sicurezza informatica|кибербезопасность
+fidarsi di|доверять
+controllare / verificare le informazioni|проверять информацию
+il futuro|будущее
+secondo me / a mio parere|по-моему / по моему мнению`,
+bur:`esaminare|рассматривать, проверять
+essere abbonato|иметь абонемент, подписку
+restituire|вернуть
+rimuovere|убрать, удалить
+rinunciare a|отказаться от
+rotto|сломанный
+smarrito|потерянный
+la soluzione|решение
+il reclamo|жалоба
+la ricevuta|квитанция`};
+const E={
+e1:`l’affitto / il canone d’affitto|аренда / арендная плата
+il proprietario / il padrone di casa|хозяин квартиры
+l’inquilino / la locataria|съёмщик / арендатор
+il contratto di locazione|договор аренды
+la caparra / il deposito cauzionale|залог, депозит
+le spese condominiali|коммунальные платежи за дом
+arredato / non arredato|меблированный / без мебели
+il riscaldamento autonomo / centralizzato|автономное / центральное отопление
+il trasloco / traslocare|переезд / переезжать
+il guasto / la riparazione|поломка / ремонт`,
+e2:`lo scontrino|чек (товарный)
+la garanzia|гарантия
+il cambio / cambiare un articolo|обмен / обменять товар
+il difetto / difettoso|дефект / бракованный
+il rimborso / chiedere il rimborso|возврат денег / просить возврат
+il bancomat / la carta di credito|банкомат (или карта) / кредитная карта
+il conto corrente|банковский счёт
+il prelievo / prelevare|снятие денег / снимать деньги
+la riparazione / il riparatore|ремонт / мастер по ремонту
+la tintoria / la lavanderia|химчистка / прачечная`,
+e3:`il ritardo / la cancellazione|задержка / отмена (рейса, поезда)
+la coincidenza|пересадка (на поезд/самолёт)
+il binario|платформа, путь
+il bagaglio a mano / da stiva|ручная кладь / багаж
+smarrire il bagaglio|потерять багаж
+noleggiare un’auto / il noleggio|арендовать машину / аренда
+la patente di guida|водительские права
+l’ingorgo / la coda|пробка / очередь
+il reclamo / fare reclamo|претензия / подать жалобу`,
+san:`la prescrizione / la ricetta medica|рецепт врача
+il dolore / far male|боль / болеть
+la ferita / il taglio|рана / порез
+la distorsione / la storta|растяжение / вывих
+l’integratore / le vitamine|БАД / витамины
+il cerotto / la benda|пластырь / бинт
+la visita specialistica|консультация узкого специалиста
+misurare la pressione / la febbre|мерить давление / температуру`,
+lav:`il colloquio di lavoro|собеседование
+la lettera di presentazione / motivazionale|сопроводительное письмо
+le mansioni / i compiti|рабочие обязанности
+il periodo di prova|испытательный срок
+promuovere / la promozione|повысить / повышение по службе
+le dimissioni / dimettersi|увольнение по собственному / уволиться
+il lavoro da remoto / lo smart working|удалённая работа`,
+e6:`sono d’accordo / non sono d’accordo|я согласен / не согласен
+soddisfatto / insoddisfatto|доволен / недоволен
+deluso / la delusione|разочарован / разочарование
+preoccupato / la preoccupazione|обеспокоен / беспокойство
+arrabbiato / infastidito|сердитый / раздражённый
+consigliare / il consiglio|советовать / совет
+proporre / la proposta|предлагать / предложение
+valutare / la valutazione|оценивать / оценка`,
+bur:`lo SPID / la CIE|цифровая идентификация / электронный паспорт
+la marca da bollo|гербовая марка (для документов)
+il rinnovo / rinnovare|продление / продлить
+la proroga / prorogare|отсрочка, продление срока / продлевать
+la scadenza / scadere|окончание срока / истекать
+autocertificare / l’autocertificazione|заверить лично / самодекларация
+la conformità / conforme|соответствие / соответствующий
+compilare in stampatello|заполнить печатными буквами
+inoltrare una domanda|переслать / подать заявление`};
 const T=[
 ["fam","La famiglia","Семья",`la nascita|рождение
 il genitore|родитель
@@ -273,6 +532,7 @@ la rassegna|фестиваль, цикл показов
 la tradizione|традиция
 la sezione|раздел
 il consolato|консульство`],
+["ia","L’intelligenza artificiale","Искусственный интеллект",``],
 ["bur","Burocrazia","Бюрократическая лексика",`il comune|мэрия, муниципалитет
 la domanda|заявление
 la legge|закон
@@ -346,23 +606,32 @@ tardivo|поздний, просроченный
 la delega|доверенность
 l’autocertificazione|самодекларация
 maggiorenne|совершеннолетний`]
-].map(([id,it,ru,d])=>({id,it,ru,w:d.split("\n").map(l=>{const p=l.split("|");return{i:p[0],r:p[1]}})}));
+,["e1","Casa e affitto","Жильё и аренда",``],
+["e2","Spese, acquisti e servizi","Покупки и услуги",``],
+["e3","Viaggi e trasporti","Путешествия и транспорт",``],
+["e6","Sentimenti e opinioni","Эмоции и мнение",``],
+
+].map(([id,it,ru,d])=>{const f=(s,k)=>s.split("\n").filter(Boolean).map(l=>{const p=l.split("|"),o={i:p[0],r:p[1]};if(k===1)o.b=1;if(k===2)o.b=1;return o});return{id,it,ru,w:f(d).concat(B[id]?f(B[id],1):[]).concat(E[id]?f(E[id],2):[])}});
 
 let known={};try{known=JSON.parse(localStorage.getItem("cils-known")||"{}")}catch(e){}
 const save=()=>{try{localStorage.setItem("cils-known",JSON.stringify(known))}catch(e){}};
 const app=document.getElementById("app");
-const left=t=>t.w.filter(x=>!known[x.i]);
+let mode="all";
+const inMode=x=>mode==="all"||(mode==="b1")===!!x.b;
+const pool=t=>t.w.filter(inMode);
+const left=t=>pool(t).filter(x=>!known[x.i]);
 let topic=null,q=[],pos=0,shown=false;
 
 function home(){
   topic=null;
-  const all=T.reduce((a,t)=>a+t.w.length,0),rest=T.reduce((a,t)=>a+left(t).length,0);
+  const all=T.reduce((a,t)=>a+pool(t).length,0),rest=T.reduce((a,t)=>a+left(t).length,0);
   app.innerHTML=`<h1>CILS B1 Cittadinanza</h1><p class="sub">Выучено ${all-rest} из ${all}. Выбери тему:</p>
-  <div class="bar"><i style="width:${(all-rest)/all*100}%"></i></div><button class="t2" id="dc">Словарь: все слова</button><div class="grid">`+
-  T.map(t=>`<button class="t" data-id="${t.id}"><span><b>${t.it}</b><small>${t.ru}</small></span><span class="n">${left(t).length}/${t.w.length}</span></button>`).join("")+
+  <div class="bar"><i style="width:${(all-rest)/all*100}%"></i></div><div class="row tabs">${[["all","Все слова"],["core","Основные"],["b1","B1"]].map(([k,l])=>`<button class="tab${mode===k?" on":""}" data-k="${k}">${l}</button>`).join("")}</div><button class="t2" id="dc">Словарь: все слова</button><div class="grid">`+
+  T.filter(t=>pool(t).length).map(t=>`<button class="t" data-id="${t.id}"><span><b>${t.it}</b><small>${t.ru}</small></span><span class="n">${left(t).length}/${pool(t).length}</span></button>`).join("")+
   `</div><p><button class="link" id="rs">Сбросить весь прогресс</button></p>`;
   app.querySelectorAll(".t").forEach(b=>b.onclick=()=>start(b.dataset.id));
   document.getElementById("dc").onclick=()=>{flt="all";dict()};
+  app.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{mode=b.dataset.k;home()});
   const rs=document.getElementById("rs");let armed=false;rs.onclick=()=>{if(!armed){armed=true;rs.textContent="Точно сбросить? Нажми ещё раз";rs.style.color="var(--r)";setTimeout(()=>{armed=false;rs.textContent="Сбросить весь прогресс";rs.style.color=""},4000)}else{known={};save();home()}};
 }
 function start(id){
@@ -402,7 +671,7 @@ function dict(){
   T.forEach((t,ti)=>{
     const ws=t.w.map((x,wi)=>[x,wi]).filter(([x])=>flt==="all"||(flt==="yes")===!!known[x.i]);
     if(!ws.length)return;
-    h+=`<h2>${t.it} · ${t.w.length-left(t).length}/${t.w.length}</h2>`+ws.map(([x,wi])=>`<div class="e ${known[x.i]?"k":"u"}" data-t="${ti}" data-w="${wi}"><b>${x.i}</b><span>${x.r}</span></div>`).join("");
+    h+=`<h2>${t.it} · ${t.w.filter(x=>known[x.i]).length}/${t.w.length}</h2>`+ws.map(([x,wi])=>`<div class="e ${known[x.i]?"k":"u"}" data-t="${ti}" data-w="${wi}"><b>${x.i}${x.b?" <small>B1</small>":""}</b><span>${x.r}</span></div>`).join("");
   });
   const y=window.scrollY;app.innerHTML=h;window.scrollTo(0,y);
   document.getElementById("bk").onclick=home;
